@@ -17,7 +17,12 @@ export namespace PrismaMarkdown {
       `# ${title}`,
       ...chapters.map(({ name }) => `- [${name}](#${name.toLowerCase()})`),
     ].join("\n");
-    if (chapters.length === 0) return preface;
+    if (chapters.length === 0)
+      return [
+        preface,
+        "",
+        ...addGeneratedBy(),
+      ].join("\n");
     return [
       preface, // table of contents
       "", // gap between table of contents and first chapter
